@@ -2,10 +2,8 @@
 # 這個 .gitignore 檔案由 Microsoft(R) Visual Studio 自動建立。
 ################################################################################
 
-/.vs/Fox.Proj/v16/Server/sqlite3/storage.ide-wal
-/.vs/Fox.Proj/v16/Server/sqlite3/storage.ide-shm
-/.vs/Fox.Proj/v16/Server/sqlite3/storage.ide
-/.vs/Fox.Proj/v16/Server/sqlite3/db.lock
+/.vs
 */bin
 */Debug
 */obj
+
