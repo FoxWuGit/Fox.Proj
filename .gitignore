@@ -6,3 +6,6 @@
 /.vs/Fox.Proj/v16/Server/sqlite3/storage.ide-shm
 /.vs/Fox.Proj/v16/Server/sqlite3/storage.ide
 /.vs/Fox.Proj/v16/Server/sqlite3/db.lock
+*/bin
+*/Debug
+*/obj
