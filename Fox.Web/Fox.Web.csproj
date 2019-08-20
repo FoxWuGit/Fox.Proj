@@ -146,6 +146,10 @@
       <Project>{27678e1e-bed7-4422-86d2-298ea4af1cf1}</Project>
       <Name>Fox.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Fox.Repository\Fox.Repository.csproj">
+      <Project>{d8f3f869-0102-4b0f-bece-ac956a96eda8}</Project>
+      <Name>Fox.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

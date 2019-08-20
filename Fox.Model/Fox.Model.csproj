@@ -42,6 +42,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Config\SystemCodeHandler.cs" />
+    <Compile Include="Config\SystemCodes.cs" />
     <Compile Include="Dao\dbDao.cs" />
     <Compile Include="Dao\Interface\IdbDao.cs" />
     <Compile Include="db.Context.cs">
@@ -72,6 +75,8 @@
     <Compile Include="Student.cs">
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Student\IndexReqVm.cs" />
+    <Compile Include="ViewModel\Student\IndexResVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

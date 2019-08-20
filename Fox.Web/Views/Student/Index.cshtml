@@ -1,7 +1,51 @@
-﻿
+﻿@model Fox.Model.ViewModel.Student.IndexResVM
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>學生表單</h2>
+
+@using (Html.BeginForm("Index", "Student", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="studentName">姓名</label>
+        @Html.TextBoxFor(m=>m.studentName,new { Class = "form-control", placeholder = "請輸入姓名", maxlength = "10" })
+    </div>
+    <div class="form-group">
+        <label for="studentId">身份證</label>
+        @Html.TextBoxFor(m => m.studentId, new { Class = "form-control", placeholder = "請輸入身份證", maxlength = "10" })
+    </div>
+    <button type="submit" class="btn btn-primary">查詢</button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>2132</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>1234152</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>554151</td>
+            </tr>
+        </tbody>
+    </table>
+}
 
