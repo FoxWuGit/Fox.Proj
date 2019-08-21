@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using Fox.Web.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +15,9 @@ namespace Fox.Web
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            //Mapper
+            AutoMapperConfig.Config();
         }
     }
 }
