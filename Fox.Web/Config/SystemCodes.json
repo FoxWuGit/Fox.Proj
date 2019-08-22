@@ -1,7 +1,7 @@
 {
   "DBError": {
     "SystemCode": "ER01",
-    "Message": "��Ʈw���~",
-    "SystemMessage": ""
+    "SystemMessage": "資料庫錯誤",
+    "Message": "資料庫錯誤"
   }
 }

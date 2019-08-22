@@ -2,9 +2,14 @@
 {
     public interface IModelResult
     {
-        SystemCodes.Codes ErrorCodee { get; set; }
-        bool isOK { get; set; }
+        SystemCodes.Codes? ErrorCode { get; set; }
+        bool IsOk { get; set; }
         string Message { get; set; }
         string SystemMessage { get; set; }
+    }
+
+    public interface IModelResult<T> : IModelResult
+    {
+        T ResultData { get; set; }
     }
 }
