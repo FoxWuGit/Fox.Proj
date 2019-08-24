@@ -3,6 +3,7 @@
     public interface IModelResult
     {
         SystemCodes.Codes? ErrorCode { get; set; }
+        string DisplayCode { get; set; }
         bool IsOk { get; set; }
         string Message { get; set; }
         string SystemMessage { get; set; }

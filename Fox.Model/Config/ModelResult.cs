@@ -27,6 +27,7 @@ namespace Fox.Model.Config
             SystemCode systemCode = SystemCodeHandler.GetSystemCode(errorCode);
             this.SystemMessage = systemCode.SystemMessage;
             this.Message = systemCode.Message;
+            this.DisplayCode = systemCode.DisplayCode;
         }
 
         public ModelResult(IModelResult modelResult)
@@ -61,6 +62,7 @@ namespace Fox.Model.Config
 
         public bool IsOk { get; set; }
         public SystemCodes.Codes? ErrorCode { get; set; }
+        public string DisplayCode { get; set; }
         public string SystemMessage { get; set; } = "系統執行成功";
         public string Message { get; set; }
     }

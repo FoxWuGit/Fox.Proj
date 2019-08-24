@@ -8,10 +8,9 @@ namespace Fox.Model.Config
 {
     public class SystemCode
     {
-        public string Message { get; set; }
-
-        public string SystemMessage { get; set; } = "系統執行成功";
-
         public SystemCodes.Codes ErrorCode { get; set; }
+        public string DisplayCode { get; set; }
+        public string Message { get; set; }
+        public string SystemMessage { get; set; } = "系統執行成功";
     }
 }

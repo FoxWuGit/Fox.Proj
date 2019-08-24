@@ -35,7 +35,7 @@ namespace Fox.Model.Dao
             }
             catch(Exception ex)
             {
-                modelResult = new ModelResult(SystemCodes.Codes.DBError, ex.Message);
+                modelResult = new ModelResult(SystemCodes.Codes.DBError) { SystemMessage = ex.Message };
             }
             return modelResult;
         }

@@ -105,6 +105,7 @@
     <Compile Include="Student.cs">
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Error\ErrorVM.cs" />
     <Compile Include="ViewModel\Student\IndexVM.cs" />
     <Compile Include="ViewModel\Student\InsertVm.cs" />
   </ItemGroup>

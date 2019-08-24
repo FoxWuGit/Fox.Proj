@@ -59,6 +59,7 @@ namespace Fox.Model.Config
         public static SystemCode GetSystemCode(SystemCodes.Codes errorCode, bool isThrowException = false)
         {
             // 搜尋錯誤訊息
+            string displayCode = "";
             string message = "";
             string systemMessage = "";
 
@@ -69,6 +70,8 @@ namespace Fox.Model.Config
                 {
                     SystemCode systemCode = codeMessages.ToObject<SystemCode>();
 
+                    displayCode = string.IsNullOrEmpty(systemCode.DisplayCode)
+                        ? "" : systemCode.DisplayCode;
                     message = string.IsNullOrEmpty(systemCode.Message)
                         ? "" : systemCode.Message;
                     systemMessage = string.IsNullOrEmpty(systemCode.SystemMessage)
@@ -95,6 +98,7 @@ namespace Fox.Model.Config
             return new SystemCode()
             {
                 ErrorCode = errorCode,
+                DisplayCode = displayCode,
                 Message = message,
                 SystemMessage = systemMessage
             };

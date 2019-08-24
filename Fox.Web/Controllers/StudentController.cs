@@ -61,13 +61,20 @@ namespace Fox.Web.Controllers
                 else
                 {
                     //錯誤頁
+                    TempData["error"] = reposResult;
+                    return RedirectToAction("Message", "Error");
                 }
             }
             else
             {
-                //錯誤頁
+                string msg = string.Join("/n", ModelState.Where(x => x.Value.Errors.Count > 0).Select(x => string.Join("/n", x.Value.Errors.Select(y => y.ErrorMessage).ToList())));
+                reposResult = new ModelResult(SystemCodes.Codes.ModelValidError)
+                {
+                    SystemMessage = msg
+                };
+                TempData["error"] = reposResult;
+                return RedirectToAction("Message", "Error");
             }
-            return RedirectToAction("Index");
         }
 
     }

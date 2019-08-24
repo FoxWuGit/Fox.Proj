@@ -46,14 +46,14 @@ namespace Fox.Repository.Student
                 }
                 else
                 {
-                    modelResult = new ModelResult(dbResult.ErrorCode.Value, dbResult.SystemMessage);
+                    modelResult = new ModelResult(dbResult.ErrorCode.Value) { SystemMessage = dbResult.SystemMessage };
                 }
                 doEventLog($"新增結果:input=>{JsonConvert.SerializeObject(vm)},result=>{JsonConvert.SerializeObject(modelResult)}");
                 doLog($"新增結果:input=>{JsonConvert.SerializeObject(vm)},result=>{JsonConvert.SerializeObject(modelResult)}");
             }
             catch (Exception ex)
             {
-                modelResult = new ModelResult(SystemCodes.Codes.ApplicationError01, ex.Message);
+                modelResult = new ModelResult(SystemCodes.Codes.ApplicationError01) { SystemMessage = ex.Message };
             }
 
             return modelResult;
