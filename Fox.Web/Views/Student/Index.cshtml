@@ -28,30 +28,24 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">姓名</th>
+                <th scope="col">身份證</th>
+                <th scope="col">姓別</th>
+                <th scope="col">生日</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>2132</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>1234152</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>554151</td>
-            </tr>
+            @for (int i = 0; i < Model.lstStudentInfo.Count; i++)
+            {
+                var item = Model.lstStudentInfo[i];
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@item.studentName</td>
+                    <td>@item.studentId</td>
+                    <td>@item.studentSexDesc</td>
+                    <td>@item.studentBirthDesc</td>
+                </tr>
+            }
         </tbody>
     </table>
 }
@@ -61,16 +55,6 @@
     <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
     <script>
-        //$(document).on('submit', '#QueryForm', function (e) {
-        //    debugger;
-        //    e.preventDefault();
-        //    $(this).removeData("validator").removeData("unobtrusiveValidation");//remove the form validation
-        //    $.validator.unobtrusive.parse($(this));//add the form validation
-
-        //    if ($(this).valid()) {
-        //        alert("1");
-        //    }
-        //});
         $(document).ready(function () {
             $("#InsertBtn").click(function () {
                 window.location.href = "@Url.Action("Insert","Student")";

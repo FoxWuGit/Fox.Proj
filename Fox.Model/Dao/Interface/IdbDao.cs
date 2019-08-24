@@ -6,13 +6,18 @@ namespace Fox.Model.Dao.Interface
 {
     public interface IdbDao
     {
-        IEnumerable<Student> StudentSelect();
+        /// <summary>
+        /// 查詢學生資料
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        IModelResult<IList<SelectStudentDaoResModel>> StudentSelect(SelectStudentDaoReqModel model = null);
 
         /// <summary>
         /// 新增學生資料
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        IModelResult StudentInsert(InsertDaoReqModel model);
+        IModelResult StudentInsert(InsertStudentDaoReqModel model);
     }
 }

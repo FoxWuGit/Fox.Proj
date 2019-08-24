@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fox.Model.DaoModel.Student
 {
-    public class InsertDaoReqModel
+    public class InsertStudentDaoReqModel
     {
         /// <summary>
         /// 姓名

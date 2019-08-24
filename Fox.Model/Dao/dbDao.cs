@@ -17,14 +17,60 @@ namespace Fox.Model.Dao
 
         }
 
-        public IEnumerable<Student> StudentSelect()
+        /// <summary>
+        /// 查詢學生資料
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public IModelResult<IList<SelectStudentDaoResModel>> StudentSelect(SelectStudentDaoReqModel model = null)
         {
-            return null;
+            IModelResult<IList<SelectStudentDaoResModel>> modelResult;
+
+            try
+            {
+                IEnumerable<Student> dbModel = entities.Student;
+                if (model != null)
+                {
+                    if (!string.IsNullOrEmpty(model.studentId))
+                    {
+                        dbModel = dbModel.Where(x => x.studentId.Equals(model.studentId));
+                    }
+                    if (!string.IsNullOrEmpty(model.studentName))
+                    {
+                        dbModel = dbModel.Where(x => x.studentName.Contains(model.studentName));
+                    }
+                }
+                //實際查詢
+                dbModel = dbModel.ToList();
+                if (dbModel.Any())
+                {
+                    IList<SelectStudentDaoResModel> dbResult = dbModel.Select(x =>
+                    {
+                        SelectStudentDaoResModel item = AutoMapper.Mapper.Map<SelectStudentDaoResModel>(x);
+                        return item;
+                    }).ToList();
+                    modelResult = new ModelResult<IList<SelectStudentDaoResModel>>() { ResultData = dbResult };
+                }
+                else
+                {
+                    modelResult = new ModelResult<IList<SelectStudentDaoResModel>>() { ResultData = new List<SelectStudentDaoResModel>() };
+                }
+            }
+            catch (Exception ex)
+            {
+                modelResult = new ModelResult<IList<SelectStudentDaoResModel>>(SystemCodes.Codes.DBError) { SystemMessage = ex.Message };
+            }
+            return modelResult;
         }
 
-        public IModelResult StudentInsert(InsertDaoReqModel model)
+        /// <summary>
+        /// 新增學生資料
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public IModelResult StudentInsert(InsertStudentDaoReqModel model)
         {
-            IModelResult modelResult = new ModelResult();
+            IModelResult modelResult;
             try
             {
                 Student dbModel = AutoMapper.Mapper.Map<Student>(model);

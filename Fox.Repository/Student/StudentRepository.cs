@@ -23,13 +23,57 @@ namespace Fox.Repository.Student
         }
 
 
-
-        public IndexVM SelectStudent (IndexVM model = null)
+        /// <summary>
+        /// 查詢學生資料
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        public IModelResult<IndexVM> SelectStudent (IndexVM vm = null)
         {
+            IModelResult<IndexVM> modelResult;
 
-            return null;
+            try
+            {
+                doEventLog($"查詢資料:input=>{JsonConvert.SerializeObject(vm)}");
+                doLog($"查詢資料:input=>{JsonConvert.SerializeObject(vm)}");
+
+                SelectStudentDaoReqModel model = null;
+                if (vm != null)
+                    model = AutoMapper.Mapper.Map<SelectStudentDaoReqModel>(vm);
+                IModelResult<IList<SelectStudentDaoResModel>> dbResult = dao.StudentSelect(model);
+                if (dbResult.IsOk)
+                {
+                    modelResult = new ModelResult<IndexVM>();
+                    if (dbResult.ResultData.Any())
+                    {
+                        modelResult.ResultData = new IndexVM();
+                        modelResult.ResultData.lstStudentInfo = dbResult.ResultData.Select(x =>
+                        {
+                            IndexStudentItem item = AutoMapper.Mapper.Map<IndexStudentItem>(x);
+                            return item;
+                        }).ToList();
+                    }
+                }
+                else
+                {
+                    modelResult = new ModelResult<IndexVM>(dbResult.ErrorCode.Value) { SystemMessage = dbResult.SystemMessage };
+                }
+                doEventLog($"查詢結果:input=>{JsonConvert.SerializeObject(vm)},result=>{JsonConvert.SerializeObject(modelResult)}");
+                doLog($"查詢結果:input=>{JsonConvert.SerializeObject(vm)},result=>{JsonConvert.SerializeObject(modelResult)}");
+            }
+            catch (Exception ex)
+            {
+                modelResult = new ModelResult<IndexVM>(SystemCodes.Codes.ApplicationError01) { SystemMessage = ex.Message };
+            }
+
+            return modelResult;
         }
 
+        /// <summary>
+        /// 新增學生資料
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
         public IModelResult InsertStudent(InsertVm vm)
         {
             IModelResult modelResult;
@@ -38,7 +82,7 @@ namespace Fox.Repository.Student
                 doEventLog($"新增資料:input=>{JsonConvert.SerializeObject(vm)}");
                 doLog($"新增資料:input=>{JsonConvert.SerializeObject(vm)}");
 
-                InsertDaoReqModel model = AutoMapper.Mapper.Map<InsertDaoReqModel>(vm);
+                InsertStudentDaoReqModel model = AutoMapper.Mapper.Map<InsertStudentDaoReqModel>(vm);
                 IModelResult dbResult = dao.StudentInsert(model);
                 if (dbResult.IsOk)
                 {
@@ -53,7 +97,7 @@ namespace Fox.Repository.Student
             }
             catch (Exception ex)
             {
-                modelResult = new ModelResult(SystemCodes.Codes.ApplicationError01) { SystemMessage = ex.Message };
+                modelResult = new ModelResult(SystemCodes.Codes.ApplicationError02) { SystemMessage = ex.Message };
             }
 
             return modelResult;

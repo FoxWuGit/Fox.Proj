@@ -11,8 +11,11 @@ namespace Fox.Web.App_Start
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<InsertVm, InsertDaoReqModel>();
-                cfg.CreateMap<InsertDaoReqModel, Student>();
+                cfg.CreateMap<InsertVm, InsertStudentDaoReqModel>();
+                cfg.CreateMap<InsertStudentDaoReqModel, Student>();
+                cfg.CreateMap<IndexVM, SelectStudentDaoReqModel>();
+                cfg.CreateMap<Student, SelectStudentDaoResModel>();
+                cfg.CreateMap<SelectStudentDaoResModel, IndexStudentItem>();
             });
         }
     }

@@ -83,7 +83,9 @@
     <Compile Include="Config\SystemCode.cs" />
     <Compile Include="Config\SystemCodeHandler.cs" />
     <Compile Include="Config\SystemCodes.cs" />
-    <Compile Include="DaoModel\Student\InsertDaoReqModel.cs" />
+    <Compile Include="DaoModel\Student\InsertStudentDaoReqModel.cs" />
+    <Compile Include="DaoModel\Student\SelectStudentDaoReqModel.cs" />
+    <Compile Include="DaoModel\Student\SelectStudentDaoResModel.cs" />
     <Compile Include="Dao\dbDao.cs" />
     <Compile Include="Dao\Interface\IdbDao.cs" />
     <Compile Include="db.Context.cs">

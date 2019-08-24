@@ -19,23 +19,47 @@ namespace Fox.Web.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            ModelResult model = new ModelResult(SystemCodes.Codes.DBError);
-            repository.SelectStudent();
-
-            IndexVM resVM = new IndexVM();
-            return View(resVM);
+            IModelResult<IndexVM> reposResult = repository.SelectStudent();
+            if (reposResult.IsOk)
+            {
+                return View(reposResult.ResultData);
+            }
+            else
+            {
+                //錯誤頁
+                TempData["error"] = reposResult;
+                return RedirectToAction("Message", "Error");
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(IndexVM vm)
         {
+            IModelResult<IndexVM> reposResult;
             if (ModelState.IsValid)
             {
-
+                reposResult = repository.SelectStudent(vm);
+                if (reposResult.IsOk)
+                {
+                    return View(reposResult.ResultData);
+                }
+                else
+                {
+                    //錯誤頁
+                    TempData["error"] = reposResult;
+                    return RedirectToAction("Message", "Error");
+                }
             }
-            repository.SelectStudent(vm);
-            IndexVM resVM = new IndexVM();
-            return View(resVM);
+            else
+            {
+                string msg = string.Join("/n", ModelState.Where(x => x.Value.Errors.Count > 0).Select(x => string.Join("/n", x.Value.Errors.Select(y => y.ErrorMessage).ToList())));
+                reposResult = new ModelResult<IndexVM>(SystemCodes.Codes.ModelValidError)
+                {
+                    SystemMessage = msg
+                };
+                TempData["error"] = reposResult;
+                return RedirectToAction("Message", "Error");
+            }
         }
 
         /// <summary>
@@ -47,7 +71,6 @@ namespace Fox.Web.Controllers
             InsertVm resVM = new InsertVm();
             return View(resVM);
         }
-
         [HttpPost]
         public ActionResult Insert(InsertVm vm)
         {
