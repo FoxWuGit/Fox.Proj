@@ -1,4 +1,6 @@
-﻿using Fox.Model.ViewModel.Student;
+﻿using AutoMapper;
+using Fox.Model.Config;
+using Fox.Model.ViewModel.Student;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,13 @@ namespace Fox.Repository.Student
 {
     public class StudentRepository
     {
-        public IndexResVM SelectStudent (IndexReqVm model = null)
+        public IndexVM SelectStudent (IndexVM model = null)
+        {
+
+            return null;
+        }
+
+        public IModelResult InsertStudent(IndexVM model = null)
         {
             return null;
         }

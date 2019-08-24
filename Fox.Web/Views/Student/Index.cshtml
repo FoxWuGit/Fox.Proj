@@ -1,21 +1,28 @@
-﻿@model Fox.Model.ViewModel.Student.IndexResVM
+﻿@model Fox.Model.ViewModel.Student.IndexVM
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>學生表單</h2>
-
-@using (Html.BeginForm("Index", "Student", FormMethod.Post))
+@using (Html.BeginForm("Index", "Student", FormMethod.Post, new { id = "QueryForm", role = "form" }))
 {
-    <div class="form-group">
+    @Html.AntiForgeryToken()
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" id="InsertBtn" class="btn btn-primary">新增</button>
+    </div>
+
+    <div class="form-group" style="margin-top: 10px">
         <label for="studentName">姓名</label>
-        @Html.TextBoxFor(m=>m.studentName,new { Class = "form-control", placeholder = "請輸入姓名", maxlength = "10" })
+        @Html.TextBoxFor(m => m.studentName, new { Class = "form-control", placeholder = "請輸入姓名", maxlength = "5" })
+        @Html.ValidationMessageFor(m => m.studentName)
     </div>
     <div class="form-group">
         <label for="studentId">身份證</label>
         @Html.TextBoxFor(m => m.studentId, new { Class = "form-control", placeholder = "請輸入身份證", maxlength = "10" })
+        @Html.ValidationMessageFor(m => m.studentId)
     </div>
-    <button type="submit" class="btn btn-primary">查詢</button>
+    <button type="submit" id="SelectBtn" class="btn btn-primary">查詢</button>
 
     <table class="table">
         <thead>
@@ -47,5 +54,32 @@
             </tr>
         </tbody>
     </table>
+}
+
+@section Scripts_Head {
+    <script src="~/Scripts/jquery-migrate-3.0.0.min.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script>
+        //$(document).on('submit', '#QueryForm', function (e) {
+        //    debugger;
+        //    e.preventDefault();
+        //    $(this).removeData("validator").removeData("unobtrusiveValidation");//remove the form validation
+        //    $.validator.unobtrusive.parse($(this));//add the form validation
+
+        //    if ($(this).valid()) {
+        //        alert("1");
+        //    }
+        //});
+        $(document).ready(function () {
+            $("#InsertBtn").click(function () {
+                window.location.href = "@Url.Action("Insert","Student")";
+            });
+        });
+    </script>
+}
+
+@section Scripts_Footer {
+
 }
 

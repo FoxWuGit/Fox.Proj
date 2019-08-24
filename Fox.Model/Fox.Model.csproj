@@ -83,8 +83,8 @@
     <Compile Include="Student.cs">
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Student\IndexReqVm.cs" />
-    <Compile Include="ViewModel\Student\IndexResVM.cs" />
+    <Compile Include="ViewModel\Student\IndexVM.cs" />
+    <Compile Include="ViewModel\Student\InsertVm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
