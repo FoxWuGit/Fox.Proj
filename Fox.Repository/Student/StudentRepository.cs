@@ -104,6 +104,39 @@ namespace Fox.Repository.Student
         }
 
         /// <summary>
+        /// 刪除學生資料
+        /// </summary>
+        /// <param name="gid"></param>
+        /// <returns></returns>
+        public IModelResult DeleteStudent(string gid)
+        {
+            IModelResult modelResult;
+            try
+            {
+                doEventLog($"刪除資料:input=>{gid}");
+                doLog($"刪除資料:input=>{gid}");
+
+                IModelResult dbResult = dao.StudentDelete(gid);
+                if (dbResult.IsOk)
+                {
+                    modelResult = new ModelResult();
+                }
+                else
+                {
+                    modelResult = new ModelResult(dbResult.ErrorCode.Value) { SystemMessage = dbResult.SystemMessage };
+                }
+                doEventLog($"刪除結果:input=>{gid},result=>{JsonConvert.SerializeObject(modelResult)}");
+                doLog($"刪除結果:input=>{gid},result=>{JsonConvert.SerializeObject(modelResult)}");
+            }
+            catch (Exception ex)
+            {
+                modelResult = new ModelResult(SystemCodes.Codes.ApplicationError02) { SystemMessage = ex.Message };
+            }
+
+            return modelResult;
+        }
+
+        /// <summary>
         /// 取得dao服務
         /// </summary>
         /// <returns></returns>

@@ -100,5 +100,39 @@ namespace Fox.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// 刪除
+        /// </summary>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public ActionResult Delete(string k)
+        {
+            IModelResult reposResult;
+            if (!string.IsNullOrEmpty(k.Trim()))
+            {
+                reposResult = repository.DeleteStudent(k);
+                if (reposResult.IsOk)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    //錯誤頁
+                    TempData["error"] = reposResult;
+                    return RedirectToAction("Message", "Error");
+                }
+            }
+            else
+            {
+                string msg = "無刪除目標值";
+                reposResult = new ModelResult(SystemCodes.Codes.ModelValidError)
+                {
+                    SystemMessage = msg
+                };
+                TempData["error"] = reposResult;
+                return RedirectToAction("Message", "Error");
+            }
+
+        }
     }
 }

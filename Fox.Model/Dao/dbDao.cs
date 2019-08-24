@@ -85,5 +85,35 @@ namespace Fox.Model.Dao
             }
             return modelResult;
         }
+
+        /// <summary>
+        /// 刪除學生資料
+        /// </summary>
+        /// <param name="gid"></param>
+        /// <returns></returns>
+        public IModelResult StudentDelete(string gid)
+        {
+            IModelResult modelResult;
+            try
+            {
+                IList<Student> dbModel = entities.Student.Where(x => x.id.ToString() == gid).ToList();
+                if (dbModel.Any())
+                {
+                    Student deleteItem = dbModel.First();
+                    entities.Student.Remove(deleteItem);
+                    entities.SaveChanges();
+                    modelResult = new ModelResult();
+                }
+                else
+                {
+                    modelResult = new ModelResult(SystemCodes.Codes.DBError) { SystemMessage = $"無此資料{gid}" };
+                }
+            }
+            catch (Exception ex)
+            {
+                modelResult = new ModelResult(SystemCodes.Codes.DBError) { SystemMessage = ex.Message };
+            }
+            return modelResult;
+        }
     }
 }

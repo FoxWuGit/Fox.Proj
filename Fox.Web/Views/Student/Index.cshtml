@@ -32,6 +32,7 @@
                 <th scope="col">身份證</th>
                 <th scope="col">姓別</th>
                 <th scope="col">生日</th>
+                <th scope="col">功能</th>
             </tr>
         </thead>
         <tbody>
@@ -44,6 +45,10 @@
                     <td>@item.studentId</td>
                     <td>@item.studentSexDesc</td>
                     <td>@item.studentBirthDesc</td>
+                    <td>
+                        @Html.ActionLink("修改資料", "Edit", new { k = item.id }, new { Class = "btn btn-link" })
+                        @Html.ActionLink("刪除資料", "Delete", new { k = item.id }, new { Class = "btn btn-link" })
+                    </td>
                 </tr>
             }
         </tbody>

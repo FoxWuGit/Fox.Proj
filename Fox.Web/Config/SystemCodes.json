@@ -13,10 +13,15 @@
     "DisplayCode": "ER03",
     "SystemMessage": "查詢資料錯誤",
     "Message": "查詢資料錯誤"
-  },  
+  },
   "ApplicationError02": {
     "DisplayCode": "ER04",
     "SystemMessage": "資料新增錯誤",
     "Message": "資料新增錯誤"
+  },
+  "ApplicationError04": {
+    "DisplayCode": "ER06",
+    "SystemMessage": "資料刪除錯誤",
+    "Message": "資料刪除錯誤"
   }
 }

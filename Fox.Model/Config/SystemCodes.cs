@@ -13,7 +13,8 @@ namespace Fox.Model.Config
             DBError,
             ModelValidError,
             ApplicationError01,
-            ApplicationError02
+            ApplicationError02,
+            ApplicationError04
         }
     }
 }
