@@ -151,6 +151,7 @@
     <Content Include="Views\Student\Insert.cshtml" />
     <Content Include="Views\Error\Message.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Student\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -45,7 +45,7 @@ namespace Fox.Model.ViewModel.Student
         /// 姓別
         /// </summary>
         public string studentSex { get; set; }
-        public string studentSexDesc => this.studentSex.Equals("1") ? "男" : (this.studentSex.Equals("2") ? "女" : "");
+        public string studentSexDesc => (this.studentSex ?? "").Equals("1") ? "男" : ((this.studentSex ?? "").Equals("2") ? "女" : "");
         /// <summary>
         /// 生日
         /// </summary>

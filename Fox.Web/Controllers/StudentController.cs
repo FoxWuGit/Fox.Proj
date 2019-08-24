@@ -68,15 +68,78 @@ namespace Fox.Web.Controllers
         /// <returns></returns>
         public ActionResult Insert()
         {
-            InsertVm resVM = new InsertVm();
+            InsertVM resVM = new InsertVM();
             return View(resVM);
         }
         [HttpPost]
-        public ActionResult Insert(InsertVm vm)
+        public ActionResult Insert(InsertVM vm)
         {
             IModelResult reposResult;
             if (ModelState.IsValid) {
                 reposResult = repository.InsertStudent(vm);
+                if (reposResult.IsOk)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    //錯誤頁
+                    TempData["error"] = reposResult;
+                    return RedirectToAction("Message", "Error");
+                }
+            }
+            else
+            {
+                string msg = string.Join("/n", ModelState.Where(x => x.Value.Errors.Count > 0).Select(x => string.Join("/n", x.Value.Errors.Select(y => y.ErrorMessage).ToList())));
+                reposResult = new ModelResult(SystemCodes.Codes.ModelValidError)
+                {
+                    SystemMessage = msg
+                };
+                TempData["error"] = reposResult;
+                return RedirectToAction("Message", "Error");
+            }
+        }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(string k)
+        {
+            IModelResult<SelectEditVM> reposResult;
+            if (!string.IsNullOrEmpty(k.Trim()))
+            {
+                reposResult = repository.SelectStudent(k);
+                if (reposResult.IsOk)
+                {
+                    return View(reposResult.ResultData);
+                }
+                else
+                {
+                    //錯誤頁
+                    TempData["error"] = reposResult;
+                    return RedirectToAction("Message", "Error");
+                }
+            }
+            else
+            {
+                string msg = "無刪除目標值";
+                reposResult = new ModelResult<SelectEditVM>(SystemCodes.Codes.ModelValidError)
+                {
+                    SystemMessage = msg
+                };
+                TempData["error"] = reposResult;
+                return RedirectToAction("Message", "Error");
+            }
+        }
+        [HttpPost]
+        public ActionResult Edit(EditVM vm)
+        {
+            IModelResult reposResult;
+            if (ModelState.IsValid)
+            {
+                reposResult = repository.UpdateStudent(vm);
                 if (reposResult.IsOk)
                 {
                     return RedirectToAction("Index");
@@ -132,7 +195,6 @@ namespace Fox.Web.Controllers
                 TempData["error"] = reposResult;
                 return RedirectToAction("Message", "Error");
             }
-
         }
     }
 }

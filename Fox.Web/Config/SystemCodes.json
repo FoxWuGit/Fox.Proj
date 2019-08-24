@@ -19,6 +19,11 @@
     "SystemMessage": "資料新增錯誤",
     "Message": "資料新增錯誤"
   },
+  "ApplicationError03": {
+    "DisplayCode": "ER05",
+    "SystemMessage": "資料修改錯誤",
+    "Message": "資料修改錯誤"
+  },
   "ApplicationError04": {
     "DisplayCode": "ER06",
     "SystemMessage": "資料刪除錯誤",

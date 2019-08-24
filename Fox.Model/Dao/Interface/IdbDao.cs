@@ -21,6 +21,13 @@ namespace Fox.Model.Dao.Interface
         IModelResult StudentInsert(InsertStudentDaoReqModel model);
 
         /// <summary>
+        /// 修改學生資料
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        IModelResult StudentUpdate(UpdateStudentDaoReqModel model);
+
+        /// <summary>
         /// 刪除學生資料
         /// </summary>
         /// <param name="gid"></param>

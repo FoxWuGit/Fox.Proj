@@ -68,13 +68,59 @@ namespace Fox.Repository.Student
 
             return modelResult;
         }
+        /// <summary>
+        /// 查詢案件(修改用)
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        public IModelResult<SelectEditVM> SelectStudent(string gid)
+        {
+            IModelResult<SelectEditVM> modelResult;
+
+            try
+            {
+                doEventLog($"查詢資料:input=>{gid}");
+                doLog($"查詢資料:input=>{gid}");
+
+                IModelResult<IList<SelectStudentDaoResModel>> dbResult = dao.StudentSelect();
+                if (dbResult.IsOk)
+                {
+                    modelResult = new ModelResult<SelectEditVM>();
+                    if (dbResult.ResultData.Any())
+                    {
+                        IList<SelectStudentDaoResModel> lstDBResult = dbResult.ResultData.Where(x => x.id.ToString().Equals(gid)).ToList();
+                        if (lstDBResult.Any())
+                        {
+                            SelectEditVM model = AutoMapper.Mapper.Map<SelectEditVM>(lstDBResult.First());
+                            modelResult.ResultData = model;
+                        }
+                        else
+                        {
+                            modelResult = new ModelResult<SelectEditVM>(SystemCodes.Codes.ApplicationError01) { SystemMessage = $"查詢錯誤，無此識別碼{gid}" };
+                        }
+                    }
+                }
+                else
+                {
+                    modelResult = new ModelResult<SelectEditVM>(dbResult.ErrorCode.Value) { SystemMessage = dbResult.SystemMessage };
+                }
+                doEventLog($"查詢結果:input=>{gid},result=>{JsonConvert.SerializeObject(modelResult)}");
+                doLog($"查詢結果:input=>{gid},result=>{JsonConvert.SerializeObject(modelResult)}");
+            }
+            catch (Exception ex)
+            {
+                modelResult = new ModelResult<SelectEditVM>(SystemCodes.Codes.ApplicationError01) { SystemMessage = ex.Message };
+            }
+
+            return modelResult;
+        }
 
         /// <summary>
         /// 新增學生資料
         /// </summary>
         /// <param name="vm"></param>
         /// <returns></returns>
-        public IModelResult InsertStudent(InsertVm vm)
+        public IModelResult InsertStudent(InsertVM vm)
         {
             IModelResult modelResult;
             try
@@ -98,6 +144,40 @@ namespace Fox.Repository.Student
             catch (Exception ex)
             {
                 modelResult = new ModelResult(SystemCodes.Codes.ApplicationError02) { SystemMessage = ex.Message };
+            }
+
+            return modelResult;
+        }
+
+        /// <summary>
+        /// 修改學生資料
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        public IModelResult UpdateStudent(EditVM vm)
+        {
+            IModelResult modelResult;
+            try
+            {
+                doEventLog($"修改資料:input=>{JsonConvert.SerializeObject(vm)}");
+                doLog($"修改資料:input=>{JsonConvert.SerializeObject(vm)}");
+
+                UpdateStudentDaoReqModel model = AutoMapper.Mapper.Map<UpdateStudentDaoReqModel>(vm);
+                IModelResult dbResult = dao.StudentUpdate(model);
+                if (dbResult.IsOk)
+                {
+                    modelResult = new ModelResult();
+                }
+                else
+                {
+                    modelResult = new ModelResult(dbResult.ErrorCode.Value) { SystemMessage = dbResult.SystemMessage };
+                }
+                doEventLog($"修改結果:input=>{JsonConvert.SerializeObject(vm)},result=>{JsonConvert.SerializeObject(modelResult)}");
+                doLog($"修改結果:input=>{JsonConvert.SerializeObject(vm)},result=>{JsonConvert.SerializeObject(modelResult)}");
+            }
+            catch (Exception ex)
+            {
+                modelResult = new ModelResult(SystemCodes.Codes.ApplicationError03) { SystemMessage = ex.Message };
             }
 
             return modelResult;

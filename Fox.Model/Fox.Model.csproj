@@ -86,6 +86,7 @@
     <Compile Include="DaoModel\Student\InsertStudentDaoReqModel.cs" />
     <Compile Include="DaoModel\Student\SelectStudentDaoReqModel.cs" />
     <Compile Include="DaoModel\Student\SelectStudentDaoResModel.cs" />
+    <Compile Include="DaoModel\Student\UpdateStudentDaoReqModel.cs" />
     <Compile Include="Dao\dbDao.cs" />
     <Compile Include="Dao\Interface\IdbDao.cs" />
     <Compile Include="db.Context.cs">
@@ -108,8 +109,10 @@
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Error\ErrorVM.cs" />
+    <Compile Include="ViewModel\Student\EditVM.cs" />
     <Compile Include="ViewModel\Student\IndexVM.cs" />
-    <Compile Include="ViewModel\Student\InsertVm.cs" />
+    <Compile Include="ViewModel\Student\InsertVM.cs" />
+    <Compile Include="ViewModel\Student\SelectEditVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

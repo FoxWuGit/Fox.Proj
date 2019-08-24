@@ -11,11 +11,14 @@ namespace Fox.Web.App_Start
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<InsertVm, InsertStudentDaoReqModel>();
+                cfg.CreateMap<InsertVM, InsertStudentDaoReqModel>();
                 cfg.CreateMap<InsertStudentDaoReqModel, Student>();
                 cfg.CreateMap<IndexVM, SelectStudentDaoReqModel>();
                 cfg.CreateMap<Student, SelectStudentDaoResModel>();
                 cfg.CreateMap<SelectStudentDaoResModel, IndexStudentItem>();
+                cfg.CreateMap<SelectStudentDaoResModel, SelectEditVM>()
+                    .ForMember(target => target.studentBirth, opt => opt.MapFrom(src => src.studentBirth.HasValue ? src.studentBirth.Value.ToString("yyyy/MM/dd") : ""));
+                cfg.CreateMap<EditVM, UpdateStudentDaoReqModel>();
             });
         }
     }

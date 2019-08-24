@@ -87,6 +87,36 @@ namespace Fox.Model.Dao
         }
 
         /// <summary>
+        /// 修改學生資料
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public IModelResult StudentUpdate(UpdateStudentDaoReqModel model)
+        {
+            IModelResult modelResult;
+            try
+            {
+                IEnumerable<Student> dbModel = entities.Student.Where(x => x.id.Equals(model.id)).ToList();
+                if (dbModel.Any())
+                {
+                    Student dbResult = dbModel.First();
+                    dbResult.studentId = model.studentId;
+                    dbResult.studentName = model.studentName;
+                    dbResult.studentSex = model.studentSex;
+                    dbResult.studentBirth = model.studentBirth;
+                    dbResult.studentAddr = model.studentAddr;
+                    entities.SaveChanges();
+                }
+                modelResult = new ModelResult();
+            }
+            catch (Exception ex)
+            {
+                modelResult = new ModelResult(SystemCodes.Codes.DBError) { SystemMessage = ex.Message };
+            }
+            return modelResult;
+        }
+
+        /// <summary>
         /// 刪除學生資料
         /// </summary>
         /// <param name="gid"></param>
