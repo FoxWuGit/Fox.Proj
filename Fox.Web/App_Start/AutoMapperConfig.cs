@@ -1,23 +1,19 @@
 ﻿using AutoMapper;
-using Fox.Model.Config;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using Fox.Model;
+using Fox.Model.DaoModel.Student;
+using Fox.Model.ViewModel.Student;
 
 namespace Fox.Web.App_Start
 {
     public class AutoMapperConfig
     {
-        public static MapperConfiguration MapperConfiguration { get; private set; }
-        public static IMapper Mapper { get; private set; }
         public static void Config()
         {
-            MapperConfiguration = new AutoMapper.MapperConfiguration(x =>
+            Mapper.Initialize(cfg =>
             {
-                x.CreateMap<IModelResult, ModelResult>();
+                cfg.CreateMap<InsertVm, InsertDaoReqModel>();
+                cfg.CreateMap<InsertDaoReqModel, Student>();
             });
-            Mapper = MapperConfiguration.CreateMapper();
         }
     }
 }

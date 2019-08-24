@@ -11,11 +11,11 @@
           </Key>
           <Property Name="id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="studentSeq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="studentId" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="studentName" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="studentSex" Type="char" MaxLength="1" />
-          <Property Name="studentYear" Type="int" />
-          <Property Name="studentId" Type="varchar" MaxLength="10" />
           <Property Name="studentBirth" Type="date" />
+          <Property Name="studentAddr" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityContainer Name="dbModelStoreContainer">
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
@@ -33,11 +33,11 @@
           </Key>
           <Property Name="id" Type="Guid" Nullable="false" />
           <Property Name="studentSeq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studentId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="studentName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="studentSex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="studentYear" Type="Int32" />
-          <Property Name="studentId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="studentBirth" Type="DateTime" Precision="0" />
+          <Property Name="studentAddr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -48,11 +48,11 @@
           <EntitySetMapping Name="Student">
             <EntityTypeMapping TypeName="dbModel.Student">
               <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="studentAddr" ColumnName="studentAddr" />
                 <ScalarProperty Name="studentBirth" ColumnName="studentBirth" />
-                <ScalarProperty Name="studentId" ColumnName="studentId" />
-                <ScalarProperty Name="studentYear" ColumnName="studentYear" />
                 <ScalarProperty Name="studentSex" ColumnName="studentSex" />
                 <ScalarProperty Name="studentName" ColumnName="studentName" />
+                <ScalarProperty Name="studentId" ColumnName="studentId" />
                 <ScalarProperty Name="studentSeq" ColumnName="studentSeq" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

@@ -6,8 +6,9 @@
 
 <h2>新增-學生表單</h2>
 
-@using (Html.BeginForm("Inserted", "Student", FormMethod.Post))
+@using (Html.BeginForm("Insert", "Student", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
     <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" id="SelectBtn" class="btn btn-primary">查詢</button>
     </div>
@@ -15,14 +16,39 @@
     <div class="form-group" style="margin-top: 10px">
         <label for="studentName">姓名</label>
         @Html.TextBoxFor(m => m.studentName, new { Class = "form-control", placeholder = "請輸入姓名", maxlength = "5" })
+        @Html.ValidationMessageFor(m => m.studentName)
     </div>
     <div class="form-group">
         <label for="studentId">身份證</label>
         @Html.TextBoxFor(m => m.studentId, new { Class = "form-control", placeholder = "請輸入身份證", maxlength = "10" })
+        @Html.ValidationMessageFor(m => m.studentId)
     </div>
+    <div class="form-group">
+        <label for="studentSex">姓別</label> <br />
+        @foreach (var item in Model.lstSex)
+        {
+            @Html.RadioButtonFor(model => model.studentSex, item.Value, new { Class = "control-radio", selected = item.Selected })
+            <label class="control-label">@item.Text</label>
+        }
+        @Html.ValidationMessageFor(m => m.studentSex)
+    </div>
+    <div class="form-group">
+        <label for="studentBirth">生日</label>
+        @Html.TextBoxFor(m => m.studentBirth, new { Class = "form-control", placeholder = "請輸入生日", maxlength = "10" })
+        @Html.ValidationMessageFor(m => m.studentBirth)
+    </div>
+    <div class="form-group">
+        <label for="studentAddr">地址</label>
+        @Html.TextBoxFor(m => m.studentAddr, new { Class = "form-control", placeholder = "請輸入地址", maxlength = "250" })
+        @Html.ValidationMessageFor(m => m.studentAddr)
+    </div>
+    <input type="submit" id="insertBtn" class="btn btn-primary" value="新增">
 }
 
 @section Scripts_Footer {
+    <script src="~/Scripts/jquery-migrate-3.0.0.min.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
     <script>
         $(document).ready(function () {
             $("#SelectBtn").click(function () {

@@ -44,7 +44,31 @@ namespace Fox.Web.Controllers
         /// <returns></returns>
         public ActionResult Insert()
         {
-            return View();
+            InsertVm resVM = new InsertVm();
+            return View(resVM);
         }
+
+        [HttpPost]
+        public ActionResult Insert(InsertVm vm)
+        {
+            IModelResult reposResult;
+            if (ModelState.IsValid) {
+                reposResult = repository.InsertStudent(vm);
+                if (reposResult.IsOk)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    //錯誤頁
+                }
+            }
+            else
+            {
+                //錯誤頁
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }

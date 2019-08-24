@@ -16,10 +16,10 @@ namespace Fox.Model
     {
         public System.Guid id { get; set; }
         public int studentSeq { get; set; }
+        public string studentId { get; set; }
         public string studentName { get; set; }
         public string studentSex { get; set; }
-        public Nullable<int> studentYear { get; set; }
-        public string studentId { get; set; }
         public Nullable<System.DateTime> studentBirth { get; set; }
+        public string studentAddr { get; set; }
     }
 }

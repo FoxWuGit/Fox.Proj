@@ -11,7 +11,7 @@ namespace Fox.Model.Config
         public enum Codes
         {
             DBError,
-            ApplicationError
+            ApplicationError01
         }
     }
 }

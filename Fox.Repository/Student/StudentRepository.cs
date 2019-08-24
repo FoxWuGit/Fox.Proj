@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
 using Fox.Model.Config;
+using Fox.Model.Dao;
+using Fox.Model.Dao.Interface;
+using Fox.Model.DaoModel.Student;
 using Fox.Model.ViewModel.Student;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +15,57 @@ namespace Fox.Repository.Student
 {
     public class StudentRepository
     {
+        private IdbDao dao;
+
+        public StudentRepository()
+        {
+            dao = GetDao();
+        }
+
+
+
         public IndexVM SelectStudent (IndexVM model = null)
         {
 
             return null;
         }
 
-        public IModelResult InsertStudent(IndexVM model = null)
+        public IModelResult InsertStudent(InsertVm vm)
         {
-            return null;
+            IModelResult modelResult;
+            try
+            {
+                doEventLog($"新增資料:input=>{JsonConvert.SerializeObject(vm)}");
+                doLog($"新增資料:input=>{JsonConvert.SerializeObject(vm)}");
+
+                InsertDaoReqModel model = AutoMapper.Mapper.Map<InsertDaoReqModel>(vm);
+                IModelResult dbResult = dao.StudentInsert(model);
+                if (dbResult.IsOk)
+                {
+                    modelResult = new ModelResult();
+                }
+                else
+                {
+                    modelResult = new ModelResult(dbResult.ErrorCode.Value, dbResult.SystemMessage);
+                }
+                doEventLog($"新增結果:input=>{JsonConvert.SerializeObject(vm)},result=>{JsonConvert.SerializeObject(modelResult)}");
+                doLog($"新增結果:input=>{JsonConvert.SerializeObject(vm)},result=>{JsonConvert.SerializeObject(modelResult)}");
+            }
+            catch (Exception ex)
+            {
+                modelResult = new ModelResult(SystemCodes.Codes.ApplicationError01, ex.Message);
+            }
+
+            return modelResult;
+        }
+
+        /// <summary>
+        /// 取得dao服務
+        /// </summary>
+        /// <returns></returns>
+        protected virtual IdbDao GetDao()
+        {
+            return new dbDao();
         }
 
         /// <summary>

@@ -3,5 +3,10 @@
     "SystemCode": "ER01",
     "SystemMessage": "資料庫錯誤",
     "Message": "資料庫錯誤"
+  },
+  "ApplicationError01": {
+    "SystemCode": "ER02",
+    "SystemMessage": "資料新增錯誤",
+    "Message": "資料新增錯誤"
   }
 }
