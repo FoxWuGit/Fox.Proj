@@ -15,19 +15,14 @@ namespace Fox.Repository.Student
 {
     public class StudentRepository
     {
-        private IdbDao dao;
-
-        public StudentRepository()
-        {
-            dao = GetDao();
-        }
-
+        protected IdbDao dao;
 
         /// <summary>
         /// 查詢學生資料
         /// </summary>
         /// <param name="vm"></param>
         /// <returns></returns>
+        protected SelectStudentDaoReqModel selectStudentModel = null;
         public IModelResult<IndexVM> SelectStudent (IndexVM vm = null)
         {
             IModelResult<IndexVM> modelResult;
@@ -37,10 +32,12 @@ namespace Fox.Repository.Student
                 doEventLog($"查詢資料:input=>{JsonConvert.SerializeObject(vm)}");
                 doLog($"查詢資料:input=>{JsonConvert.SerializeObject(vm)}");
 
-                SelectStudentDaoReqModel model = null;
+                selectStudentModel = null;
                 if (vm != null)
-                    model = AutoMapper.Mapper.Map<SelectStudentDaoReqModel>(vm);
-                IModelResult<IList<SelectStudentDaoResModel>> dbResult = dao.StudentSelect(model);
+                    selectStudentModel = AutoMapper.Mapper.Map<SelectStudentDaoReqModel>(vm);
+
+                dao = GetDao();
+                IModelResult<IList<SelectStudentDaoResModel>> dbResult = dao.StudentSelect(selectStudentModel);
                 if (dbResult.IsOk)
                 {
                     modelResult = new ModelResult<IndexVM>();
@@ -52,6 +49,10 @@ namespace Fox.Repository.Student
                             IndexStudentItem item = AutoMapper.Mapper.Map<IndexStudentItem>(x);
                             return item;
                         }).ToList();
+                    }
+                    else
+                    {
+                        modelResult.ResultData = new IndexVM();
                     }
                 }
                 else
@@ -82,6 +83,7 @@ namespace Fox.Repository.Student
                 doEventLog($"查詢資料:input=>{gid}");
                 doLog($"查詢資料:input=>{gid}");
 
+                dao = GetDao();
                 IModelResult<IList<SelectStudentDaoResModel>> dbResult = dao.StudentSelect();
                 if (dbResult.IsOk)
                 {
@@ -129,6 +131,7 @@ namespace Fox.Repository.Student
                 doLog($"新增資料:input=>{JsonConvert.SerializeObject(vm)}");
 
                 InsertStudentDaoReqModel model = AutoMapper.Mapper.Map<InsertStudentDaoReqModel>(vm);
+                dao = GetDao();
                 IModelResult dbResult = dao.StudentInsert(model);
                 if (dbResult.IsOk)
                 {
@@ -163,6 +166,7 @@ namespace Fox.Repository.Student
                 doLog($"修改資料:input=>{JsonConvert.SerializeObject(vm)}");
 
                 UpdateStudentDaoReqModel model = AutoMapper.Mapper.Map<UpdateStudentDaoReqModel>(vm);
+                dao = GetDao();
                 IModelResult dbResult = dao.StudentUpdate(model);
                 if (dbResult.IsOk)
                 {
@@ -196,6 +200,7 @@ namespace Fox.Repository.Student
                 doEventLog($"刪除資料:input=>{gid}");
                 doLog($"刪除資料:input=>{gid}");
 
+                dao = GetDao();
                 IModelResult dbResult = dao.StudentDelete(gid);
                 if (dbResult.IsOk)
                 {

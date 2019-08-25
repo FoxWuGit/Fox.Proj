@@ -24,7 +24,7 @@ namespace Fox.Model.ViewModel.Student
         /// <summary>
         /// 學生資訊
         /// </summary>
-        public IList<IndexStudentItem> lstStudentInfo { get; set; }
+        public IList<IndexStudentItem> lstStudentInfo { get; set; } = new List<IndexStudentItem>();
     }
 
     public class IndexStudentItem

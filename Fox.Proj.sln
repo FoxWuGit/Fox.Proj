@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fox.Model", "Fox.Model\Fox.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fox.Repository", "Fox.Repository\Fox.Repository.csproj", "{D8F3F869-0102-4B0F-BECE-AC956A96EDA8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fox.Repository.Tests", "Fox.Repository.Tests\Fox.Repository.Tests.csproj", "{F84F5122-0CC7-436F-B86F-D917B2EF80B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D8F3F869-0102-4B0F-BECE-AC956A96EDA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8F3F869-0102-4B0F-BECE-AC956A96EDA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8F3F869-0102-4B0F-BECE-AC956A96EDA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F84F5122-0CC7-436F-B86F-D917B2EF80B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F84F5122-0CC7-436F-B86F-D917B2EF80B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F84F5122-0CC7-436F-B86F-D917B2EF80B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F84F5122-0CC7-436F-B86F-D917B2EF80B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
