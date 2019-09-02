@@ -1,19 +1,17 @@
-﻿using AutoMapper;
-using Fox.Model.Config;
+﻿using Fox.Model.Config;
 using Fox.Model.Dao;
 using Fox.Model.Dao.Interface;
 using Fox.Model.DaoModel.Student;
 using Fox.Model.ViewModel.Student;
+using Fox.Repository.Interface.Student;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fox.Repository.Student
 {
-    public class StudentRepository
+    public class StudentRepository : IStudentRepository
     {
         protected IdbDao dao;
 
@@ -23,7 +21,7 @@ namespace Fox.Repository.Student
         /// <param name="vm"></param>
         /// <returns></returns>
         protected SelectStudentDaoReqModel selectStudentModel = null;
-        public IModelResult<IndexVM> SelectStudent (IndexVM vm = null)
+        public IModelResult<IndexVM> SelectStudent(IndexVM vm = null)
         {
             IModelResult<IndexVM> modelResult;
 
